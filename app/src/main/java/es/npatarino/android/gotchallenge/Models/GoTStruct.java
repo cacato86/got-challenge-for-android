@@ -30,13 +30,23 @@ public class GoTStruct {
         return charactersAndHouses.get(house);
     }
 
+    public ArrayList<GoTHouse> getAllHouses() {
+        ArrayList<GoTHouse> totalHouses = new ArrayList<>();
+        Iterator it = charactersAndHouses.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry) it.next();
+            totalHouses.add((GoTHouse) pair.getKey());
+        }
+        return totalHouses;
+    }
+
     public ArrayList<GoTCharacter> getAllCharacters() {
         ArrayList<GoTCharacter> totalCharacters = new ArrayList<>();
         Iterator it = charactersAndHouses.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
+            Log.e("KEY", ((GoTHouse) pair.getKey()).getName());
             totalCharacters.addAll((ArrayList<GoTCharacter>) pair.getValue());
-            it.remove();
         }
         return totalCharacters;
     }

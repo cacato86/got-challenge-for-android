@@ -1,8 +1,5 @@
 package es.npatarino.android.gotchallenge.Deserializer;
 
-import android.provider.SyncStateContract;
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -14,7 +11,6 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
@@ -25,6 +21,7 @@ import es.npatarino.android.gotchallenge.Models.GoTHouse;
 public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap<GoTHouse, ArrayList<GoTCharacter>>> {
 
     private HashMap<GoTHouse, ArrayList<GoTCharacter>> formatedData;
+    private String UKNOWN_HOUSE = "Uknown House";
 
     @Override
     public HashMap<GoTHouse, ArrayList<GoTCharacter>> deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
@@ -42,7 +39,7 @@ public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap
             GoTHouse house = gson.fromJson(element, GoTHouse.class);
             addCharacterToHouse(character, house);
         }
-        printMap(formatedData);
+        //printMap(formatedData);
         return formatedData;
     }
 
@@ -59,12 +56,12 @@ public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap
         }
     }
 
-    public static void printMap(HashMap mp) {
+    /*public static void printMap(HashMap mp) {
         Iterator it = mp.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
-            Log.e("KEY", ((GoTHouse) pair.getKey()).getName());
+
             it.remove(); // avoids a ConcurrentModificationException
         }
-    }
+    }*/
 }

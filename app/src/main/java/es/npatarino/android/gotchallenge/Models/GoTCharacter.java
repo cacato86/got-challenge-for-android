@@ -2,10 +2,12 @@ package es.npatarino.android.gotchallenge.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Nicolás Patarino on 21/02/16.
  */
-public class GoTCharacter {
+public class GoTCharacter implements Serializable {
 
     @SerializedName("name")
     String name;

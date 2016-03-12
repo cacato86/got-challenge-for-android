@@ -8,54 +8,52 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
 
+import es.npatarino.android.gotchallenge.ImageManager.ImageManager;
+import es.npatarino.android.gotchallenge.Models.GoTCharacter;
+
 public class DetailActivity extends AppCompatActivity {
-
-
-    private static final String TAG = "DetailActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        final ImageView ivp = (ImageView) findViewById(R.id.iv_photo);
-        final TextView tvn = (TextView) findViewById(R.id.tv_name);
-        final TextView tvd = (TextView) findViewById(R.id.tv_description);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            GoTCharacter character = ((GoTCharacter) bundle.get("character"));
+            Log.e("CHAR", character.getName()+" /");
+            createToolbar(character.getName());
+            fillDetail(character);
+        } else {
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 
-        final String d = getIntent().getStringExtra("description");
-        final String n = getIntent().getStringExtra("name");
-        final String i = getIntent().getStringExtra("imageUrl");
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t);
-        toolbar.setTitle(n);
+    private void createToolbar(String titleToolbar){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_detail);
+        toolbar.setTitle(titleToolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                URL url = null;
-                try {
-                    url = new URL(i);
-                    final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    DetailActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ivp.setImageBitmap(bmp);
-                            tvn.setText(n);
-                            tvd.setText(d);
-                        }
-                    });
-                } catch (IOException e) {
-                    Log.e(TAG, e.getLocalizedMessage());
-                }
-            }
-        }).start();
+    private void fillDetail(GoTCharacter character) {
+        final ImageView imageDetail = (ImageView) findViewById(R.id.iv_photo);
+        final TextView nameDetail = (TextView) findViewById(R.id.tv_name);
+        final TextView DescriptionDetail = (TextView) findViewById(R.id.tv_description);
+
+        nameDetail.setText(character.getName());
+        DescriptionDetail.setText(character.getDescription());
+
+        ImageManager imageManager = new ImageManager(DetailActivity.this);
+        imageManager.getDowloaderImageTask().setImageUrlIntoImageView(character.getImageUrl(), imageDetail);
+
     }
 }

@@ -1,10 +1,11 @@
 package es.npatarino.android.gotchallenge.Models;
 
-import android.util.Log;
-
 import com.google.gson.annotations.SerializedName;
 
-public class GoTHouse {
+import java.io.Serializable;
+
+
+public class GoTHouse implements Serializable {
 
     @SerializedName("houseImageUrl")
     String imageUrl;
