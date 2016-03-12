@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
@@ -33,7 +34,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+
+import es.npatarino.android.gotchallenge.Deserializer.CharactersAndHousesDeserializer;
+import es.npatarino.android.gotchallenge.Models.GoTCharacter;
+import es.npatarino.android.gotchallenge.Models.GoTHouse;
+import es.npatarino.android.gotchallenge.Models.GoTStruct;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -157,6 +164,8 @@ public class HomeActivity extends AppCompatActivity {
                 public void run() {
                     String url = "http://ec2-52-18-202-124.eu-west-1.compute.amazonaws.com:3000/characters";
 
+
+
                     URL obj = null;
                     try {
                         obj = new URL(url);
@@ -169,29 +178,35 @@ public class HomeActivity extends AppCompatActivity {
                             response.append(inputLine);
                         }
                         in.close();
+
+                        GoTStruct struct = new GoTStruct(response.toString());
+
+                        Log.e("PERSO", struct.getAllCharacters().size()+" /");
+
                         Type listType = new TypeToken<ArrayList<GoTCharacter>>() {
                         }.getType();
                         final List<GoTCharacter> characters = new Gson().fromJson(response.toString(), listType);
+
                         GoTHousesListFragment.this.getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ArrayList<GoTCharacter.GoTHouse> hs = new ArrayList<GoTCharacter.GoTHouse>();
+                                ArrayList<GoTHouse> hs = new ArrayList<>();
                                 for (int i = 0; i < characters.size(); i++) {
                                     boolean b = false;
                                     for (int j = 0; j < hs.size(); j++) {
-                                        if (hs.get(j).n.equalsIgnoreCase(characters.get(i).hn)) {
+                                        if (hs.get(j).getName().equalsIgnoreCase(characters.get(i).getName())) {
                                             b = true;
                                         }
                                     }
                                     if (!b) {
-                                        if (characters.get(i).hi != null && !characters.get(i).hi.isEmpty()) {
-                                            GoTCharacter.GoTHouse h = new GoTCharacter.GoTHouse();
-                                            h.i = characters.get(i).hi;
+                                        /*if (characters.get(i).hi != null && !characters.get(i).hi.isEmpty()) {
+                                            GoTHouse houseInstance = new GoTHouse();
+                                            houseInstance.setImageUrl(); = characters.get(i).hi;
                                             h.n = characters.get(i).hn;
                                             h.u = characters.get(i).hu;
                                             hs.add(h);
                                             b = false;
-                                        }
+                                        }*/
                                     }
                                 }
                                 adp.addAll(hs);
@@ -269,9 +284,9 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onClick(final View v) {
                     Intent intent = new Intent(((GotCharacterViewHolder) holder).itemView.getContext(), DetailActivity.class);
-                    intent.putExtra("description", gcs.get(position).d);
-                    intent.putExtra("name", gcs.get(position).n);
-                    intent.putExtra("imageUrl", gcs.get(position).iu);
+                    intent.putExtra("description", gcs.get(position).getDescription());
+                    intent.putExtra("name", gcs.get(position).getName());
+                    intent.putExtra("imageUrl", gcs.get(position).getImageUrl());
                     ((GotCharacterViewHolder) holder).itemView.getContext().startActivity(intent);
                 }
             });
@@ -300,13 +315,13 @@ public class HomeActivity extends AppCompatActivity {
                     public void run() {
                         URL url = null;
                         try {
-                            url = new URL(goTCharacter.iu);
+                            url = new URL(goTCharacter.getImageUrl());
                             final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                             a.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     imp.setImageBitmap(bmp);
-                                    tvn.setText(goTCharacter.n);
+                                    tvn.setText(goTCharacter.getName());
                                 }
                             });
                         } catch (IOException e) {
@@ -321,7 +336,7 @@ public class HomeActivity extends AppCompatActivity {
 
     static class GoTHouseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private final List<GoTCharacter.GoTHouse> gcs;
+        private final List<GoTHouse> gcs;
         private Activity a;
 
         public GoTHouseAdapter(Activity activity) {
@@ -329,9 +344,9 @@ public class HomeActivity extends AppCompatActivity {
             a = activity;
         }
 
-        void addAll(Collection<GoTCharacter.GoTHouse> collection) {
+        void addAll(Collection<GoTHouse> collection) {
             for (int i = 0; i < collection.size(); i++) {
-                gcs.add((GoTCharacter.GoTHouse) collection.toArray()[i]);
+                gcs.add((GoTHouse) collection.toArray()[i]);
             }
         }
 
@@ -361,13 +376,13 @@ public class HomeActivity extends AppCompatActivity {
                 imp = (ImageView) itemView.findViewById(R.id.ivBackground);
             }
 
-            public void render(final GoTCharacter.GoTHouse goTHouse) {
+            public void render(final GoTHouse goTHouse) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         URL url = null;
                         try {
-                            url = new URL(goTHouse.u);
+                            url = new URL(goTHouse.getImageUrl());
                             final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                             a.runOnUiThread(new Runnable() {
                                 @Override
