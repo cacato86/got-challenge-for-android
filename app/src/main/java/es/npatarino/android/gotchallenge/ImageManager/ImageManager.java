@@ -16,7 +16,8 @@ public class ImageManager {
     }
 
     private ImageManagerInterface createDownloaderTask(Activity activity) {
-        return new ImageDownloaderPicasso(activity);
+        //return new ImageDownloaderPicasso(activity);
+        return new ImageDownloaderThread(activity);
     }
 
     public ImageManagerInterface getDowloaderImageTask() {

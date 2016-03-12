@@ -1,28 +1,40 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/row_height">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/ivBackground"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="@dimen/row_height"
+        android:onClick="@{viewModel.onItemClick}">
 
-    <View
-        android:id="@+id/ivGradient"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/row_gradient_height"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/row_gradient"
-        />
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:imageUrl ="@{viewModel.imageUrl}"/>
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:textColor="@android:color/white"
-        />
-</RelativeLayout>
+        <View
+            android:id="@+id/ivGradient"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_gradient_height"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/row_gradient" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:text="@{viewModel.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</layout>

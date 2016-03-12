@@ -53,7 +53,7 @@ public class GoTCharactersListFragment extends Fragment {
 
                     GoTStruct charactersStruct = new GoTStruct(response.toString());
 
-                    final GoTCharacterAdapter characterAdapter = new GoTCharacterAdapter(getActivity(), charactersStruct.getAllCharacters());
+                    final GoTCharacterAdapter characterAdapter = new GoTCharacterAdapter(charactersStruct.getAllCharacters());
 
                     GoTCharactersListFragment.this.getActivity().runOnUiThread(new Runnable() {
                         @Override
