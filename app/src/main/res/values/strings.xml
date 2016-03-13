@@ -6,5 +6,7 @@
     <string name="error">Se ha producido un error</string>
     <string name="preference_file_key">Preferences</string>
     <string name="no_elements">No elements availables at this moments</string>
+    <string name="image_detail_trans">Image_Detail_Transition</string>
+    <string name="text_detail_trans">Text_Detail_Transition</string>
 
 </resources>

@@ -54,7 +54,7 @@ public class GoTCharacterAdapter extends RecycleViewAnimateCustom {
 
         void bindCharacter(GoTCharacter character) {
             if (binding.getViewModel() == null) {
-                binding.setViewModel(new CharacterViewModel(activity, character));
+                binding.setViewModel(new CharacterViewModel(character));
             } else {
                 binding.getViewModel().setCharacter(character);
             }

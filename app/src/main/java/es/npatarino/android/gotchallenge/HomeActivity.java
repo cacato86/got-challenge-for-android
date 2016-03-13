@@ -7,8 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import es.npatarino.android.gotchallenge.Adapters.SectionsPagerAdapter;
+import es.npatarino.android.gotchallenge.Customs.AppCompatActivityCustom;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivityCustom {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

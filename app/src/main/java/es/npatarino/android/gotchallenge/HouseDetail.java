@@ -3,22 +3,19 @@ package es.npatarino.android.gotchallenge;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTCharacterAdapter;
+import es.npatarino.android.gotchallenge.Customs.AppCompatActivityCustom;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
 import es.npatarino.android.gotchallenge.Utils.Utils;
@@ -26,7 +23,8 @@ import es.npatarino.android.gotchallenge.Utils.Utils;
 /**
  * Created by Usuario on 12/03/2016.
  */
-public class HouseDetail extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class HouseDetail extends AppCompatActivityCustom implements SearchView.OnQueryTextListener {
+
     private ContentLoadingProgressBar progressBar;
     private RecyclerView charactersList;
     private GoTCharacterAdapter characterAdapter;

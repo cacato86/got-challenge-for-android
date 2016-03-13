@@ -32,7 +32,7 @@ public class GoTStruct {
                 HashMap.Entry pair = (HashMap.Entry) it.next();
                 GoTHouse house = (GoTHouse) pair.getKey();
                 house.setCharactersOfThisHouse((ArrayList<GoTCharacter>) pair.getValue());
-                totalHouses.add(house);
+                totalHouses.add(0, house);
             }
         }
         return totalHouses;
@@ -44,7 +44,7 @@ public class GoTStruct {
             Iterator it = charactersAndHouses.entrySet().iterator();
             while (it.hasNext()) {
                 HashMap.Entry pair = (HashMap.Entry) it.next();
-                totalCharacters.addAll((ArrayList<GoTCharacter>) pair.getValue());
+                totalCharacters.addAll(0, (ArrayList<GoTCharacter>) pair.getValue());
             }
         }
         return totalCharacters;
