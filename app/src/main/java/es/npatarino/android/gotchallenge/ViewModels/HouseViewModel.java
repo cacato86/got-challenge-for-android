@@ -8,38 +8,39 @@ import android.view.View;
 import android.widget.ImageView;
 
 import es.npatarino.android.gotchallenge.CharacterDetail;
+import es.npatarino.android.gotchallenge.HouseDetail;
 import es.npatarino.android.gotchallenge.ImageManager.ImageManager;
-import es.npatarino.android.gotchallenge.Models.GoTCharacter;
+import es.npatarino.android.gotchallenge.Models.GoTHouse;
 
 /**
  * Created by Usuario on 12/03/2016.
  */
-public class CharacterViewModel extends BaseObservable {
+public class HouseViewModel extends BaseObservable {
     private static Activity activity;
-    private GoTCharacter character;
+    private GoTHouse house;
 
-    public CharacterViewModel(Activity activity, GoTCharacter character) {
+    public HouseViewModel(Activity activity, GoTHouse house) {
         this.activity = activity;
-        this.character = character;
+        this.house = house;
     }
 
-    public void setCharacter(GoTCharacter character) {
-        this.character = character;
+    public void setHouse(GoTHouse house) {
+        this.house = house;
         notifyChange();
     }
 
     public void onItemClick(View view) {
-        Intent intent = new Intent(activity, CharacterDetail.class);
-        intent.putExtra("character", character);
+        Intent intent = new Intent(activity, HouseDetail.class);
+        intent.putExtra("house", house);
         activity.startActivity(intent);
     }
 
-    public String getName(){
-        return character.getName();
+    public String getName() {
+        return house.getName();
     }
 
-    public String getImageUrl(){
-        return character.getImageUrl();
+    public String getImageUrl() {
+        return house.getImageUrl();
     }
 
     @BindingAdapter({"bind:imageUrl"})

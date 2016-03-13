@@ -3,6 +3,7 @@ package es.npatarino.android.gotchallenge.Models;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class GoTHouse implements Serializable {
@@ -13,6 +14,7 @@ public class GoTHouse implements Serializable {
     String name;
     @SerializedName("houseId")
     String id;
+    ArrayList<GoTCharacter> charactersOfThisHouse = new ArrayList<>();
 
     public String getImageUrl() {
         return imageUrl;
@@ -36,6 +38,14 @@ public class GoTHouse implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ArrayList<GoTCharacter> getCharactersOfThisHouse() {
+        return charactersOfThisHouse;
+    }
+
+    public void setCharactersOfThisHouse(ArrayList<GoTCharacter> charactersOfThisHouse) {
+        this.charactersOfThisHouse = charactersOfThisHouse;
     }
 
     @Override

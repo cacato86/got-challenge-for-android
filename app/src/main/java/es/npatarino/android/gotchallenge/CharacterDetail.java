@@ -1,7 +1,5 @@
 package es.npatarino.android.gotchallenge;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,13 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.URL;
-
 import es.npatarino.android.gotchallenge.ImageManager.ImageManager;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 
-public class DetailActivity extends AppCompatActivity {
+public class CharacterDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         nameDetail.setText(character.getName());
         DescriptionDetail.setText(character.getDescription());
 
-        ImageManager imageManager = new ImageManager(DetailActivity.this);
+        ImageManager imageManager = new ImageManager(CharacterDetail.this);
         imageManager.getDowloaderImageTask().setImageUrlIntoImageView(character.getImageUrl(), imageDetail);
 
     }

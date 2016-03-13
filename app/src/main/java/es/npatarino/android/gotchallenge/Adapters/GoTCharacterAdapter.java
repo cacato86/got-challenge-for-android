@@ -1,24 +1,13 @@
 package es.npatarino.android.gotchallenge.Adapters;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import es.npatarino.android.gotchallenge.DetailActivity;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.R;
 import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
@@ -29,9 +18,11 @@ import es.npatarino.android.gotchallenge.databinding.GotCharacterRowBinding;
  */
 public class GoTCharacterAdapter extends RecyclerView.Adapter<GoTCharacterAdapter.CharacterBindingHolder> {
 
+    private static Activity activity;
     private ArrayList<GoTCharacter> charactersArray;
 
-    public GoTCharacterAdapter(ArrayList<GoTCharacter> characters) {
+    public GoTCharacterAdapter(Activity activity, ArrayList<GoTCharacter> characters) {
+        this.activity = activity;
         this.charactersArray = characters;
     }
 
@@ -47,7 +38,7 @@ public class GoTCharacterAdapter extends RecyclerView.Adapter<GoTCharacterAdapte
 
     @Override
     public void onBindViewHolder(CharacterBindingHolder holder, int position) {
-        holder.bindRepository(charactersArray.get(position));
+        holder.bindCharacter(charactersArray.get(position));
     }
 
     @Override
@@ -63,9 +54,9 @@ public class GoTCharacterAdapter extends RecyclerView.Adapter<GoTCharacterAdapte
             this.binding = binding;
         }
 
-        void bindRepository(GoTCharacter character) {
+        void bindCharacter(GoTCharacter character) {
             if (binding.getViewModel() == null) {
-                binding.setViewModel(new CharacterViewModel(itemView.getContext(), character));
+                binding.setViewModel(new CharacterViewModel(activity, character));
             } else {
                 binding.getViewModel().setCharacter(character);
             }

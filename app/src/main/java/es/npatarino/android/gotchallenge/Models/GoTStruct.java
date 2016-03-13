@@ -35,7 +35,9 @@ public class GoTStruct {
         Iterator it = charactersAndHouses.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
-            totalHouses.add((GoTHouse) pair.getKey());
+            GoTHouse house = (GoTHouse) pair.getKey();
+            house.setCharactersOfThisHouse((ArrayList<GoTCharacter>) pair.getValue());
+            totalHouses.add(house);
         }
         return totalHouses;
     }

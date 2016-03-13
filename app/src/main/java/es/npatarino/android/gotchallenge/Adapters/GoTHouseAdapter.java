@@ -1,6 +1,7 @@
 package es.npatarino.android.gotchallenge.Adapters;
 
 import android.app.Activity;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -14,31 +15,41 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
+import es.npatarino.android.gotchallenge.Models.GoTStruct;
 import es.npatarino.android.gotchallenge.R;
+import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
+import es.npatarino.android.gotchallenge.ViewModels.HouseViewModel;
+import es.npatarino.android.gotchallenge.databinding.GotCharacterRowBinding;
+import es.npatarino.android.gotchallenge.databinding.GotHouseRowBinding;
 
 /**
  * Created by Usuario on 12/03/2016.
  */
-public class GoTHouseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseBindingHolder> {
 
+    private static Activity activity;
     private ArrayList<GoTHouse> housesArray;
-    private Activity activity;
 
-    public GoTHouseAdapter(Activity activity, ArrayList<GoTHouse> housesArray) {
-        this.housesArray = housesArray;
+    public GoTHouseAdapter(Activity activity, ArrayList<GoTHouse> houses) {
         this.activity = activity;
+        this.housesArray = houses;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new GotCharacterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.got_house_row, parent, false));
+    public HouseBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+         GotHouseRowBinding houseBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.got_house_row,
+                parent,
+                false);
+        return new HouseBindingHolder(houseBinding);
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        GotCharacterViewHolder gotCharacterViewHolder = (GotCharacterViewHolder) holder;
-        gotCharacterViewHolder.render(housesArray.get(position));
+    public void onBindViewHolder(HouseBindingHolder holder, int position) {
+        holder.bindRepository(housesArray.get(position));
     }
 
     @Override
@@ -46,43 +57,20 @@ public class GoTHouseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return housesArray.size();
     }
 
-    class GotCharacterViewHolder extends RecyclerView.ViewHolder {
+    public static class HouseBindingHolder extends RecyclerView.ViewHolder {
+        final GotHouseRowBinding binding;
 
-        private static final String TAG = "GotCharacterViewHolder";
-        ImageView houseImage;
-
-        public GotCharacterViewHolder(View itemView) {
-            super(itemView);
-            houseImage = (ImageView) itemView.findViewById(R.id.ivBackground);
+        public HouseBindingHolder(GotHouseRowBinding binding) {
+            super(binding.rlParent);
+            this.binding = binding;
         }
 
-        public void render(final GoTHouse goTHouse) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    if (!goTHouse.getImageUrl().equals("")){
-                        try {
-                            URL url = new URL(goTHouse.getImageUrl());
-                            final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                            activity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    houseImage.setImageBitmap(bmp);
-                                }
-                            });
-                        } catch (IOException e) {
-                            Log.e(TAG, e.getLocalizedMessage());
-                        }
-                    }else{
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                houseImage.setImageResource(R.drawable.got_placeholder);
-                            }
-                        });
-                    }
-                }
-            }).start();
+        void bindRepository(GoTHouse house) {
+            if (binding.getViewModel() == null) {
+                binding.setViewModel(new HouseViewModel(activity, house));
+            } else {
+                binding.getViewModel().setHouse(house);
+            }
         }
     }
 

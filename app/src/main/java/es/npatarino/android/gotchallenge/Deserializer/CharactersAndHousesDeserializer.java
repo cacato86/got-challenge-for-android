@@ -21,13 +21,13 @@ import es.npatarino.android.gotchallenge.Models.GoTHouse;
 public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap<GoTHouse, ArrayList<GoTCharacter>>> {
 
     private HashMap<GoTHouse, ArrayList<GoTCharacter>> formatedData;
-    private String UKNOWN_HOUSE = "Uknown House";
 
     @Override
     public HashMap<GoTHouse, ArrayList<GoTCharacter>> deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
 
         formatedData = new HashMap<>();
+        ArrayList<GoTCharacter> charactersArray = new ArrayList<>();
         Gson gson = new Gson();
 
         final JsonArray jsonData = json.getAsJsonArray();
@@ -39,7 +39,6 @@ public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap
             GoTHouse house = gson.fromJson(element, GoTHouse.class);
             addCharacterToHouse(character, house);
         }
-        //printMap(formatedData);
         return formatedData;
     }
 
@@ -55,13 +54,4 @@ public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap
             formatedData.put(house, characters);
         }
     }
-
-    /*public static void printMap(HashMap mp) {
-        Iterator it = mp.entrySet().iterator();
-        while (it.hasNext()) {
-            HashMap.Entry pair = (HashMap.Entry) it.next();
-
-            it.remove(); // avoids a ConcurrentModificationException
-        }
-    }*/
 }

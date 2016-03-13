@@ -18,7 +18,8 @@
             android:id="@+id/ivBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:imageUrl ="@{viewModel.imageUrl}"/>
+            android:scaleType="centerCrop"
+            app:imageUrl="@{viewModel.imageUrl}" />
 
         <View
             android:id="@+id/ivGradient"
@@ -29,12 +30,12 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:text="@{viewModel.name}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@{viewModel.name}"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 </layout>
