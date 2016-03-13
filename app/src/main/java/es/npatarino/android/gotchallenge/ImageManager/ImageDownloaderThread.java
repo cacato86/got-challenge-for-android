@@ -1,9 +1,9 @@
 package es.npatarino.android.gotchallenge.ImageManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -16,10 +16,10 @@ import es.npatarino.android.gotchallenge.Interfaces.ImageManagerInterface;
  */
 public class ImageDownloaderThread implements ImageManagerInterface {
 
-    private final Activity activity;
+    private final Context context;
 
-    public ImageDownloaderThread(Activity activity) {
-        this.activity = activity;
+    public ImageDownloaderThread(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ImageDownloaderThread implements ImageManagerInterface {
                 try {
                     URL url = new URL(imageUrl);
                     final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    activity.runOnUiThread(new Runnable() {
+                    ((Activity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             imageView.setImageBitmap(bmp);

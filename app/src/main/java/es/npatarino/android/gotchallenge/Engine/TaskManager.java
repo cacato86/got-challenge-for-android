@@ -1,8 +1,10 @@
 package es.npatarino.android.gotchallenge.Engine;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 
@@ -11,23 +13,24 @@ import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
  */
 public class TaskManager {
     private final TaskConfiguration taskConfigurator;
-    private final Context context;
+    private final Activity activity;
 
-    public TaskManager(Context context, TaskConfiguration taskConfigurator) {
-        this.context = context;
+    public TaskManager(Activity activity, TaskConfiguration taskConfigurator) {
+        this.activity = activity;
         this.taskConfigurator = taskConfigurator;
     }
 
     public TaskInterface getTask(){
-        if (isNetworkAvailable()){
-            
+        Log.e("ONLINE?",isNetworkAvailable(activity)+" /");
+        if (isNetworkAvailable(activity)){
+            return new TaskThread<String>().createTask(taskConfigurator);
         }else{
-            
+            return new TaskOffline(activity).createTask(taskConfigurator);
         }
     }
 
-    public boolean isNetworkAvailable(Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public boolean isNetworkAvailable(Activity activity) {
+        ConnectivityManager manager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 
         boolean isAvailable = false;

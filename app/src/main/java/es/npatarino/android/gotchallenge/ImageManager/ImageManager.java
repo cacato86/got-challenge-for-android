@@ -1,7 +1,7 @@
 package es.npatarino.android.gotchallenge.ImageManager;
 
 import android.app.Activity;
-import android.widget.ImageView;
+import android.content.Context;
 
 import es.npatarino.android.gotchallenge.Interfaces.ImageManagerInterface;
 
@@ -9,18 +9,14 @@ import es.npatarino.android.gotchallenge.Interfaces.ImageManagerInterface;
  * Created by Usuario on 12/03/2016.
  */
 public class ImageManager {
-    private ImageManagerInterface dowloaderImageTask;
+    private final Context context;
 
-    public ImageManager(Activity activity) {
-        dowloaderImageTask = createDownloaderTask(activity);
-    }
-
-    private ImageManagerInterface createDownloaderTask(Activity activity) {
-        return new ImageDownloaderPicasso(activity);
-        //return new ImageDownloaderThread(activity);
+    public ImageManager(Context context) {
+        this.context = context;
     }
 
     public ImageManagerInterface getDowloaderImageTask() {
-        return dowloaderImageTask;
+        //return new ImageDownloaderThread(context);
+        return new ImageDownloaderPicasso(context);
     }
 }

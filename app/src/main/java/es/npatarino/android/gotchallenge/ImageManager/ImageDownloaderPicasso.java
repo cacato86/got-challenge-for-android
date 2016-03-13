@@ -1,6 +1,7 @@
 package es.npatarino.android.gotchallenge.ImageManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -13,18 +14,18 @@ import es.npatarino.android.gotchallenge.R;
  */
 public class ImageDownloaderPicasso implements ImageManagerInterface {
 
-    private final Activity activity;
+    private final Context context;
 
-    public ImageDownloaderPicasso(Activity activity) {
-        this.activity = activity;
+    public ImageDownloaderPicasso(Context context) {
+        this.context = context;
     }
 
     @Override
     public void setImageUrlIntoImageView(String imageUrl, ImageView imageView) {
         if (!imageUrl.equals("")){
-            Picasso.with(activity).load(imageUrl).into(imageView);
+            Picasso.with(context).load(imageUrl).into(imageView);
         }else{
-            Picasso.with(activity).load(R.drawable.got_placeholder).into(imageView);
+            Picasso.with(context).load(R.drawable.got_placeholder).into(imageView);
         }
     }
 }

@@ -4,5 +4,6 @@
     <string name="action_settings">Settings</string>
     <string name="search_hint">Enter character name</string>
     <string name="error">Se ha producido un error</string>
+    <string name="preference_file_key">Preferences</string>
 
 </resources>

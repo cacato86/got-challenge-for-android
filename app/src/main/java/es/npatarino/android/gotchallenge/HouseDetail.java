@@ -12,14 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTCharacterAdapter;
-import es.npatarino.android.gotchallenge.Adapters.GoTHouseAdapter;
-import es.npatarino.android.gotchallenge.ImageManager.ImageManager;
-import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
 
 /**
@@ -59,7 +54,9 @@ public class HouseDetail extends AppCompatActivity {
     }
 
     private void fillDetail(GoTHouse house) {
-        final GoTCharacterAdapter characterAdapter = new GoTCharacterAdapter(HouseDetail.this, house.getCharactersOfThisHouse());
+        Log.e("DETAILHOUSE","LLAMO");
+        final GoTCharacterAdapter characterAdapter = new GoTCharacterAdapter(HouseDetail.this);
+        characterAdapter.setCharactersArray(house.getCharactersOfThisHouse());
         charactersList.setLayoutManager(new LinearLayoutManager(HouseDetail.this));
         charactersList.setHasFixedSize(true);
         charactersList.setAdapter(characterAdapter);

@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import es.npatarino.android.gotchallenge.CharacterDetail;
 import es.npatarino.android.gotchallenge.HouseDetail;
 import es.npatarino.android.gotchallenge.ImageManager.ImageManager;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
@@ -43,9 +43,10 @@ public class HouseViewModel extends BaseObservable {
         return house.getImageUrl();
     }
 
-    @BindingAdapter({"bind:imageUrl"})
+    @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
-        ImageManager imageManager = new ImageManager(activity);
+        ImageManager imageManager = new ImageManager(view.getContext());
         imageManager.getDowloaderImageTask().setImageUrlIntoImageView(imageUrl, view);
+
     }
 }

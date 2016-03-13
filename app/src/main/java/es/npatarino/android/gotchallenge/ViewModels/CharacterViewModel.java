@@ -42,9 +42,9 @@ public class CharacterViewModel extends BaseObservable {
         return character.getImageUrl();
     }
 
-    @BindingAdapter({"bind:imageUrl"})
+    @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
-        ImageManager imageManager = new ImageManager(activity);
+        ImageManager imageManager = new ImageManager(view.getContext());
         imageManager.getDowloaderImageTask().setImageUrlIntoImageView(imageUrl, view);
     }
 }

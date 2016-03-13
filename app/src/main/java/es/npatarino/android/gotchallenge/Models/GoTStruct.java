@@ -1,7 +1,5 @@
 package es.npatarino.android.gotchallenge.Models;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -47,7 +45,6 @@ public class GoTStruct {
         Iterator it = charactersAndHouses.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
-            Log.e("KEY", ((GoTHouse) pair.getKey()).getName());
             totalCharacters.addAll((ArrayList<GoTCharacter>) pair.getValue());
         }
         return totalCharacters;

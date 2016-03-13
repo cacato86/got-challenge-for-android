@@ -2,6 +2,7 @@ package es.npatarino.android.gotchallenge.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import android.widget.Toast;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTHouseAdapter;
+import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
+import es.npatarino.android.gotchallenge.Engine.TaskLauncher;
+import es.npatarino.android.gotchallenge.Engine.TaskManager;
+import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
+import es.npatarino.android.gotchallenge.Interfaces.TaskResultCalback;
 import es.npatarino.android.gotchallenge.Models.GoTStruct;
 import es.npatarino.android.gotchallenge.R;
 
@@ -25,10 +26,7 @@ import es.npatarino.android.gotchallenge.R;
  */
 public class GoTHousesListFragment extends Fragment {
 
-    private static final String TAG = "GoTHousesListFragment";
-
-    public GoTHousesListFragment() {
-    }
+    private static final String URL_SERVER = "http://ec2-52-18-202-124.eu-west-1.compute.amazonaws.com:3000/characters";
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -36,42 +34,35 @@ public class GoTHousesListFragment extends Fragment {
         final ContentLoadingProgressBar pb = (ContentLoadingProgressBar) rootView.findViewById(R.id.pb);
         final RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv);
 
-        new Thread(new Runnable() {
+        FragmentActivity activity = super.getActivity();
+
+        final GoTHouseAdapter houseAdapter = new GoTHouseAdapter(activity);
+        rv.setLayoutManager(new LinearLayoutManager(activity));
+        rv.setHasFixedSize(true);
+        rv.setAdapter(houseAdapter);
+
+        TaskConfiguration config = new TaskConfiguration();
+        config.setUrl(URL_SERVER);
+
+        TaskInterface task = new TaskManager(activity, config).getTask();
+
+        new TaskLauncher(activity, task).launchTask(new TaskResultCalback() {
+            @Override
+            public void onResult(Object value) {
+                Log.e("HOUSES", "ONRESULT");
+                GoTStruct houseStruct = new GoTStruct(value.toString());
+                houseAdapter.setHousesArray(houseStruct.getAllHouses());
+                pb.hide();
+            }
 
             @Override
-            public void run() {
-                String url = "http://ec2-52-18-202-124.eu-west-1.compute.amazonaws.com:3000/characters";
-
-                try {
-                    URL obj = new URL(url);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                    con.setRequestMethod("GET");
-                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String inputLine;
-                    StringBuffer response = new StringBuffer();
-                    while ((inputLine = in.readLine()) != null) {
-                        response.append(inputLine);
-                    }
-                    in.close();
-
-                    GoTStruct struct = new GoTStruct(response.toString());
-
-                    final GoTHouseAdapter adp = new GoTHouseAdapter(getActivity(), struct.getAllHouses());
-
-                    GoTHousesListFragment.this.getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            rv.setHasFixedSize(true);
-                            rv.setAdapter(adp);
-                            pb.hide();
-                        }
-                    });
-                } catch (IOException e) {
-                    Log.e(TAG, e.getLocalizedMessage());
-                }
+            public void onError(Object value) {
+                Log.e("HOUSESONERROR", value.toString());
+                pb.hide();
+                Toast.makeText(getContext(), value.toString(), Toast.LENGTH_LONG).show();
             }
-        }).start();
+        });
+
         return rootView;
     }
 }

@@ -2,27 +2,17 @@ package es.npatarino.android.gotchallenge.Adapters;
 
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
-import es.npatarino.android.gotchallenge.Models.GoTStruct;
 import es.npatarino.android.gotchallenge.R;
-import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
 import es.npatarino.android.gotchallenge.ViewModels.HouseViewModel;
-import es.npatarino.android.gotchallenge.databinding.GotCharacterRowBinding;
-import es.npatarino.android.gotchallenge.databinding.GotHouseRowBinding;
+import es.npatarino.android.gotchallenge.databinding.HouseRowBinding;
 
 /**
  * Created by Usuario on 12/03/2016.
@@ -30,18 +20,22 @@ import es.npatarino.android.gotchallenge.databinding.GotHouseRowBinding;
 public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseBindingHolder> {
 
     private static Activity activity;
-    private ArrayList<GoTHouse> housesArray;
+    private ArrayList<GoTHouse> housesArray = new ArrayList<>();
 
-    public GoTHouseAdapter(Activity activity, ArrayList<GoTHouse> houses) {
+    public GoTHouseAdapter(Activity activity) {
         this.activity = activity;
-        this.housesArray = houses;
+    }
+
+    public void setHousesArray(ArrayList<GoTHouse> housesArray) {
+        this.housesArray = housesArray;
+        notifyDataSetChanged();
     }
 
     @Override
     public HouseBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         GotHouseRowBinding houseBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()),
-                R.layout.got_house_row,
+         HouseRowBinding houseBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(activity),
+                R.layout.house_row,
                 parent,
                 false);
         return new HouseBindingHolder(houseBinding);
@@ -58,15 +52,16 @@ public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseB
     }
 
     public static class HouseBindingHolder extends RecyclerView.ViewHolder {
-        final GotHouseRowBinding binding;
+        final HouseRowBinding binding;
 
-        public HouseBindingHolder(GotHouseRowBinding binding) {
+        public HouseBindingHolder(HouseRowBinding binding) {
             super(binding.rlParent);
             this.binding = binding;
         }
 
         void bindRepository(GoTHouse house) {
             if (binding.getViewModel() == null) {
+                Log.e("ACTIVITY",activity+" /");
                 binding.setViewModel(new HouseViewModel(activity, house));
             } else {
                 binding.getViewModel().setHouse(house);

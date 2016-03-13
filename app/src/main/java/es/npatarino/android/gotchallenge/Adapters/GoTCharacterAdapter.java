@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.R;
 import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
-import es.npatarino.android.gotchallenge.databinding.GotCharacterRowBinding;
+import es.npatarino.android.gotchallenge.databinding.CharacterRowBinding;
 
 /**
  * Created by Usuario on 12/03/2016.
@@ -19,18 +19,22 @@ import es.npatarino.android.gotchallenge.databinding.GotCharacterRowBinding;
 public class GoTCharacterAdapter extends RecyclerView.Adapter<GoTCharacterAdapter.CharacterBindingHolder> {
 
     private static Activity activity;
-    private ArrayList<GoTCharacter> charactersArray;
+    private ArrayList<GoTCharacter> charactersArray = new ArrayList<>();
 
-    public GoTCharacterAdapter(Activity activity, ArrayList<GoTCharacter> characters) {
+    public GoTCharacterAdapter(Activity activity) {
         this.activity = activity;
-        this.charactersArray = characters;
+    }
+
+    public void setCharactersArray(ArrayList<GoTCharacter> charactersArray) {
+        this.charactersArray = charactersArray;
+        notifyDataSetChanged();
     }
 
     @Override
     public CharacterBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        GotCharacterRowBinding characterBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()),
-                R.layout.got_character_row,
+        CharacterRowBinding characterBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(activity),
+                R.layout.character_row,
                 parent,
                 false);
         return new CharacterBindingHolder(characterBinding);
@@ -47,9 +51,9 @@ public class GoTCharacterAdapter extends RecyclerView.Adapter<GoTCharacterAdapte
     }
 
     public static class CharacterBindingHolder extends RecyclerView.ViewHolder {
-        final GotCharacterRowBinding binding;
+        final CharacterRowBinding binding;
 
-        public CharacterBindingHolder(GotCharacterRowBinding binding) {
+        public CharacterBindingHolder(CharacterRowBinding binding) {
             super(binding.rlParent);
             this.binding = binding;
         }
