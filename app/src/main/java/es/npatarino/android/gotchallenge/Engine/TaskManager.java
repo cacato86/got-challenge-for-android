@@ -12,6 +12,7 @@ import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
  * Created by Usuario on 13/03/2016.
  */
 public class TaskManager {
+
     private final TaskConfiguration taskConfigurator;
     private final Activity activity;
 
@@ -20,11 +21,11 @@ public class TaskManager {
         this.taskConfigurator = taskConfigurator;
     }
 
-    public TaskInterface getTask(){
-        Log.e("ONLINE?",isNetworkAvailable(activity)+" /");
-        if (isNetworkAvailable(activity)){
+    public TaskInterface getTask() {
+        Log.e("ONLINE?", isNetworkAvailable(activity) + " /");
+        if (isNetworkAvailable(activity)) {
             return new TaskThread<String>().createTask(taskConfigurator);
-        }else{
+        } else {
             return new TaskOffline(activity).createTask(taskConfigurator);
         }
     }
@@ -38,5 +39,9 @@ public class TaskManager {
             isAvailable = true;
         }
         return isAvailable;
+    }
+
+    public TaskConfiguration getTaskConfigurator() {
+        return taskConfigurator;
     }
 }

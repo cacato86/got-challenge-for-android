@@ -1,6 +1,5 @@
 package es.npatarino.android.gotchallenge.SyncData;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -14,7 +13,6 @@ public class SyncSharedPreferences implements SyncDataInterface {
 
     private final SharedPreferences.Editor editor;
     private final SharedPreferences sharedPref;
-    private String KEY = "LocalData";
 
     public SyncSharedPreferences(Context context) {
         sharedPref = context.getSharedPreferences(
@@ -23,13 +21,13 @@ public class SyncSharedPreferences implements SyncDataInterface {
     }
 
     @Override
-    public void saveLocalData(Object data) {
-        editor.putString(KEY, data.toString());
+    public void saveLocalData(String keyForLocalQuery, Object data) {
+        editor.putString(keyForLocalQuery, data.toString());
         editor.commit();
     }
 
     @Override
-    public Object getLocaldata() {
-        return sharedPref.getString(KEY, "");
+    public Object getLocaldata(String keyForLocalQuery) {
+        return sharedPref.getString(keyForLocalQuery, "");
     }
 }

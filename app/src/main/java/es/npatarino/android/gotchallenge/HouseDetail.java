@@ -3,6 +3,7 @@ package es.npatarino.android.gotchallenge;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,17 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import es.npatarino.android.gotchallenge.Adapters.GoTCharacterAdapter;
+import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
+import es.npatarino.android.gotchallenge.Utils.Utils;
 
 /**
  * Created by Usuario on 12/03/2016.
  */
-public class HouseDetail extends AppCompatActivity {
+public class HouseDetail extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private ContentLoadingProgressBar progressBar;
     private RecyclerView charactersList;
+    private GoTCharacterAdapter characterAdapter;
+    private ArrayList<GoTCharacter> charactersArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +43,6 @@ public class HouseDetail extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             GoTHouse house = ((GoTHouse) bundle.get("house"));
-            Log.e("HOUSE",house.getName());
             createToolbar(house.getName());
             fillDetail(house);
         } else {
@@ -54,29 +61,37 @@ public class HouseDetail extends AppCompatActivity {
     }
 
     private void fillDetail(GoTHouse house) {
-        Log.e("DETAILHOUSE","LLAMO");
-        final GoTCharacterAdapter characterAdapter = new GoTCharacterAdapter(HouseDetail.this);
-        characterAdapter.setCharactersArray(house.getCharactersOfThisHouse());
+        charactersArray = house.getCharactersOfThisHouse();
+        characterAdapter = new GoTCharacterAdapter(HouseDetail.this);
+        characterAdapter.setCharacterArray(charactersArray);
         charactersList.setLayoutManager(new LinearLayoutManager(HouseDetail.this));
         charactersList.setHasFixedSize(true);
         charactersList.setAdapter(characterAdapter);
         progressBar.hide();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the options menu from XML
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search, menu);
-
-        // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.ic_search).getActionView();
-        // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        final ArrayList<GoTCharacter> filteredModelList = Utils.filterList(charactersArray, query);
+        characterAdapter.animateTo(filteredModelList);
+        charactersList.scrollToPosition(0);
         return true;
     }
 }

@@ -18,11 +18,11 @@ public class TaskLauncher {
         this.task = task;
     }
 
-    public void launchTask(final TaskResultCalback callback){
+    public void launchTask(final TaskResultCalback callback) {
         task.executeTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                new SyncDataManager<>(activity).setData(value);
+                new SyncDataManager<>(activity, task.getTaskConfiguration()).setData(value);
                 callback.onResult(value);
             }
 

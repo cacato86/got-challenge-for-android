@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTHouseAdapter;
@@ -27,19 +27,27 @@ import es.npatarino.android.gotchallenge.R;
 public class GoTHousesListFragment extends Fragment {
 
     private static final String URL_SERVER = "http://ec2-52-18-202-124.eu-west-1.compute.amazonaws.com:3000/characters";
+    private ContentLoadingProgressBar progresBar;
+    private RecyclerView recycleview;
+    private TextView emptyview;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_list, container, false);
-        final ContentLoadingProgressBar pb = (ContentLoadingProgressBar) rootView.findViewById(R.id.pb);
-        final RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv);
+        progresBar = (ContentLoadingProgressBar) rootView.findViewById(R.id.pb);
+        recycleview = (RecyclerView) rootView.findViewById(R.id.rv);
+        emptyview = (TextView) rootView.findViewById(R.id.empty_view);
 
         FragmentActivity activity = super.getActivity();
+        getData(activity);
+        return rootView;
+    }
 
+    private void getData(FragmentActivity activity) {
         final GoTHouseAdapter houseAdapter = new GoTHouseAdapter(activity);
-        rv.setLayoutManager(new LinearLayoutManager(activity));
-        rv.setHasFixedSize(true);
-        rv.setAdapter(houseAdapter);
+        recycleview.setLayoutManager(new LinearLayoutManager(activity));
+        recycleview.setHasFixedSize(true);
+        recycleview.setAdapter(houseAdapter);
 
         TaskConfiguration config = new TaskConfiguration();
         config.setUrl(URL_SERVER);
@@ -49,20 +57,21 @@ public class GoTHousesListFragment extends Fragment {
         new TaskLauncher(activity, task).launchTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                Log.e("HOUSES", "ONRESULT");
                 GoTStruct houseStruct = new GoTStruct(value.toString());
                 houseAdapter.setHousesArray(houseStruct.getAllHouses());
-                pb.hide();
+                if (houseStruct.getAllHouses().size() < 1) {
+                    emptyview.setVisibility(View.VISIBLE);
+                }
+                progresBar.hide();
             }
 
             @Override
             public void onError(Object value) {
-                Log.e("HOUSESONERROR", value.toString());
-                pb.hide();
+                emptyview.setVisibility(View.VISIBLE);
+                progresBar.hide();
                 Toast.makeText(getContext(), value.toString(), Toast.LENGTH_LONG).show();
             }
         });
 
-        return rootView;
     }
 }

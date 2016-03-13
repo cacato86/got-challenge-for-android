@@ -9,5 +9,7 @@ import es.npatarino.android.gotchallenge.Engine.TaskThread;
 public interface TaskInterface<T> {
     TaskInterface createTask(TaskConfiguration taskConfigurator);
 
+    TaskConfiguration getTaskConfiguration();
+
     void executeTask(TaskResultCalback<T> callbackResult);
 }

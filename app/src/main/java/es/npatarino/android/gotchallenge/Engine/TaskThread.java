@@ -23,6 +23,11 @@ public class TaskThread<T> implements Runnable, TaskInterface {
     }
 
     @Override
+    public TaskConfiguration getTaskConfiguration() {
+        return taskConfigurator;
+    }
+
+    @Override
     public void executeTask(TaskResultCalback callbackResult) {
         try {
             Thread thread = new Thread(this);

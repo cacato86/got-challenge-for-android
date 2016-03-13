@@ -27,9 +27,7 @@ public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap
             throws JsonParseException {
 
         formatedData = new HashMap<>();
-        ArrayList<GoTCharacter> charactersArray = new ArrayList<>();
         Gson gson = new Gson();
-
         final JsonArray jsonData = json.getAsJsonArray();
         final int sizeData = jsonData.size();
 

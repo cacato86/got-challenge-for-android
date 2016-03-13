@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import es.npatarino.android.gotchallenge.Customs.RecycleViewAnimateCustom;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
+import es.npatarino.android.gotchallenge.Models.GoTHouse;
 import es.npatarino.android.gotchallenge.R;
 import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
 import es.npatarino.android.gotchallenge.databinding.CharacterRowBinding;
@@ -16,18 +18,10 @@ import es.npatarino.android.gotchallenge.databinding.CharacterRowBinding;
 /**
  * Created by Usuario on 12/03/2016.
  */
-public class GoTCharacterAdapter extends RecyclerView.Adapter<GoTCharacterAdapter.CharacterBindingHolder> {
-
-    private static Activity activity;
-    private ArrayList<GoTCharacter> charactersArray = new ArrayList<>();
+public class GoTCharacterAdapter extends RecycleViewAnimateCustom {
 
     public GoTCharacterAdapter(Activity activity) {
-        this.activity = activity;
-    }
-
-    public void setCharactersArray(ArrayList<GoTCharacter> charactersArray) {
-        this.charactersArray = charactersArray;
-        notifyDataSetChanged();
+        super(activity);
     }
 
     @Override

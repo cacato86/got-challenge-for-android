@@ -24,28 +24,28 @@ public class GoTStruct {
         charactersAndHouses = gson.fromJson(jsonString.toString(), HashMap.class);
     }
 
-    public ArrayList<GoTCharacter> getCharactersFromHouse(GoTHouse house) {
-        return charactersAndHouses.get(house);
-    }
-
     public ArrayList<GoTHouse> getAllHouses() {
         ArrayList<GoTHouse> totalHouses = new ArrayList<>();
-        Iterator it = charactersAndHouses.entrySet().iterator();
-        while (it.hasNext()) {
-            HashMap.Entry pair = (HashMap.Entry) it.next();
-            GoTHouse house = (GoTHouse) pair.getKey();
-            house.setCharactersOfThisHouse((ArrayList<GoTCharacter>) pair.getValue());
-            totalHouses.add(house);
+        if (charactersAndHouses != null && charactersAndHouses.size() > 0) {
+            Iterator it = charactersAndHouses.entrySet().iterator();
+            while (it.hasNext()) {
+                HashMap.Entry pair = (HashMap.Entry) it.next();
+                GoTHouse house = (GoTHouse) pair.getKey();
+                house.setCharactersOfThisHouse((ArrayList<GoTCharacter>) pair.getValue());
+                totalHouses.add(house);
+            }
         }
         return totalHouses;
     }
 
     public ArrayList<GoTCharacter> getAllCharacters() {
         ArrayList<GoTCharacter> totalCharacters = new ArrayList<>();
-        Iterator it = charactersAndHouses.entrySet().iterator();
-        while (it.hasNext()) {
-            HashMap.Entry pair = (HashMap.Entry) it.next();
-            totalCharacters.addAll((ArrayList<GoTCharacter>) pair.getValue());
+        if (charactersAndHouses != null && charactersAndHouses.size() > 0) {
+            Iterator it = charactersAndHouses.entrySet().iterator();
+            while (it.hasNext()) {
+                HashMap.Entry pair = (HashMap.Entry) it.next();
+                totalCharacters.addAll((ArrayList<GoTCharacter>) pair.getValue());
+            }
         }
         return totalCharacters;
     }
