@@ -20,14 +20,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTCharacterAdapter;
+import es.npatarino.android.gotchallenge.Engine.Parser;
 import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
 import es.npatarino.android.gotchallenge.Engine.TaskLauncher;
 import es.npatarino.android.gotchallenge.Engine.TaskManager;
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 import es.npatarino.android.gotchallenge.Interfaces.TaskResultCalback;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
-import es.npatarino.android.gotchallenge.Models.GoTStruct;
 import es.npatarino.android.gotchallenge.R;
+import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
 import es.npatarino.android.gotchallenge.Utils.Utils;
 
 /**
@@ -67,12 +68,13 @@ public class GoTCharactersListFragment extends Fragment implements SearchView.On
         TaskConfiguration config = new TaskConfiguration();
         config.setUrl(URL_SERVER);
 
-        TaskInterface task = new TaskManager(activity, config).getTask();
+        TaskInterface task = new TaskManager(activity, config, Utils.isNetworkAvailable(activity)).getTask();
+        SyncDataManager<Object> syncData = new SyncDataManager<>(activity, config);
 
-        new TaskLauncher(activity, task).launchTask(new TaskResultCalback() {
+        new TaskLauncher(task, syncData).launchTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                GoTStruct charactersStruct = new GoTStruct(value.toString());
+                Parser charactersStruct = new Parser(value.toString());
                 charactersArray = charactersStruct.getAllCharacters();
                 characterAdapter.setCharacterArray(charactersArray);
                 if (charactersStruct.getAllCharacters().size() < 1) {

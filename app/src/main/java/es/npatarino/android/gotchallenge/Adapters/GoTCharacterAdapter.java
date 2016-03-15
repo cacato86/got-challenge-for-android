@@ -6,11 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 import es.npatarino.android.gotchallenge.Customs.RecycleViewAnimateCustom;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
-import es.npatarino.android.gotchallenge.Models.GoTHouse;
 import es.npatarino.android.gotchallenge.R;
 import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
 import es.npatarino.android.gotchallenge.databinding.CharacterRowBinding;

@@ -44,8 +44,8 @@ public class GoTHouse implements Serializable {
         return charactersOfThisHouse;
     }
 
-    public void setCharactersOfThisHouse(ArrayList<GoTCharacter> charactersOfThisHouse) {
-        this.charactersOfThisHouse = charactersOfThisHouse;
+    public void addCharacterToThisHouse(GoTCharacter character) {
+        this.charactersOfThisHouse.add(character);
     }
 
     @Override

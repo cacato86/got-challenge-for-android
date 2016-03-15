@@ -7,7 +7,6 @@ import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -36,15 +35,15 @@ public class CharacterViewModel extends BaseObservable {
         Intent intent = new Intent(context, CharacterDetail.class);
         intent.putExtra("character", character);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-             View imageShared = view.findViewById(R.id.ivBackground);
+            /*View imageShared = view.findViewById(R.id.ivBackground);
             View txtShared = view.findViewById(R.id.tv_name);
             Pair<View, String> pairImage = Pair.create(imageShared, imageShared.getTransitionName());
             Pair<View, String> pairText = Pair.create(txtShared, txtShared.getTransitionName());
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, pairImage, pairText);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, pairImage, pairText);*/
 
-            /*ImageView imageShared = (ImageView) view.findViewById(R.id.ivBackground);
+            ImageView imageShared = (ImageView) view.findViewById(R.id.ivBackground);
             ActivityOptionsCompat options = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation((Activity) context, imageShared, context.getString(R.string.image_detail_trans));*/
+                    makeSceneTransitionAnimation((Activity) context, imageShared, context.getString(R.string.image_detail_trans));
             context.startActivity(intent, options.toBundle());
         } else {
             context.startActivity(intent);

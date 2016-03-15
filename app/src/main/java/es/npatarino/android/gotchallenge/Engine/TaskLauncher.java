@@ -1,7 +1,5 @@
 package es.npatarino.android.gotchallenge.Engine;
 
-import android.app.Activity;
-
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 import es.npatarino.android.gotchallenge.Interfaces.TaskResultCalback;
 import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
@@ -11,19 +9,20 @@ import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
  */
 public class TaskLauncher {
     private final TaskInterface task;
-    private final Activity activity;
+    private final SyncDataManager syncData;
 
-    public TaskLauncher(Activity activity, TaskInterface task) {
-        this.activity = activity;
+    public TaskLauncher(TaskInterface task, SyncDataManager syncData) {
         this.task = task;
+        this.syncData = syncData;
     }
 
     public void launchTask(final TaskResultCalback callback) {
         task.executeTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                new SyncDataManager<>(activity, task.getTaskConfiguration()).setData(value);
                 callback.onResult(value);
+                syncData.setData(value);
+                //new SyncDataManager<>(context, task.getTaskConfiguration()).setData(value);
             }
 
             @Override

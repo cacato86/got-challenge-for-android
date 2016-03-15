@@ -1,6 +1,5 @@
 package es.npatarino.android.gotchallenge.SyncData;
 
-import android.app.Activity;
 import android.content.Context;
 
 import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;

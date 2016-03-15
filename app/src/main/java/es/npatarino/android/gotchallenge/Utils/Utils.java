@@ -1,5 +1,10 @@
 package es.npatarino.android.gotchallenge.Utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.util.ArrayList;
 
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
@@ -19,5 +24,16 @@ public class Utils {
             }
         }
         return filteredModelList;
+    }
+
+    public static boolean isNetworkAvailable(Activity activity) {
+        ConnectivityManager manager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            isAvailable = true;
+        }
+        return isAvailable;
     }
 }

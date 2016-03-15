@@ -10,7 +10,6 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
@@ -18,15 +17,14 @@ import es.npatarino.android.gotchallenge.Models.GoTHouse;
 /**
  * Created by Usuario on 12/03/2016.
  */
-public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap<GoTHouse, ArrayList<GoTCharacter>>> {
+public class CharactersAndHousesDeserializer implements JsonDeserializer<ArrayList<GoTHouse>> {
 
-    private HashMap<GoTHouse, ArrayList<GoTCharacter>> formatedData;
+    private ArrayList<GoTHouse> houses = new ArrayList<>();
 
     @Override
-    public HashMap<GoTHouse, ArrayList<GoTCharacter>> deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+    public ArrayList<GoTHouse> deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
 
-        formatedData = new HashMap<>();
         Gson gson = new Gson();
         final JsonArray jsonData = json.getAsJsonArray();
         final int sizeData = jsonData.size();
@@ -37,19 +35,18 @@ public class CharactersAndHousesDeserializer implements JsonDeserializer<HashMap
             GoTHouse house = gson.fromJson(element, GoTHouse.class);
             addCharacterToHouse(character, house);
         }
-        return formatedData;
+        return houses;
     }
 
     private void addCharacterToHouse(GoTCharacter character, GoTHouse house) {
-        if (formatedData.containsKey(house)) {
-            ArrayList<GoTCharacter> charactersFromHouse = formatedData.get(house);
-            if (!charactersFromHouse.contains(character)) {
-                charactersFromHouse.add(character);
+        if (!houses.contains(house)) {
+            if (!house.getCharactersOfThisHouse().contains(character)) {
+                house.addCharacterToThisHouse(character);
+                houses.add(house);
             }
         } else {
-            ArrayList<GoTCharacter> characters = new ArrayList<>();
-            characters.add(character);
-            formatedData.put(house, characters);
+            int indexHouse = houses.indexOf(house);
+            houses.get(indexHouse).addCharacterToThisHouse(character);
         }
     }
 }

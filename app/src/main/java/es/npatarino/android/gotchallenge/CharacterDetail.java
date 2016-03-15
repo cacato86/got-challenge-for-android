@@ -2,7 +2,6 @@ package es.npatarino.android.gotchallenge;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
@@ -38,16 +37,16 @@ public class CharacterDetail extends AppCompatActivityCustom {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(titleToolbar);
-        //collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
     }
 
     private void fillDetail(GoTCharacter character) {
         final ImageView imageDetail = (ImageView) findViewById(R.id.iv_photo);
         final TextView DescriptionDetail = (TextView) findViewById(R.id.tv_description);
 
-        DescriptionDetail.setText(character.getDescription() + "" + character.getDescription() + "" + character.getDescription());
+        DescriptionDetail.setText(character.getDescription());
 
         ImageManager imageManager = new ImageManager(CharacterDetail.this);
         imageManager.getDowloaderImageTask().setImageUrlIntoImageView(character.getImageUrl(), imageDetail);

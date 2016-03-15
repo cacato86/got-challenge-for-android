@@ -1,6 +1,5 @@
 package es.npatarino.android.gotchallenge.ImageManager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
