@@ -23,7 +23,7 @@ public class TaskManager {
         if (isNetworkActive) {
             return new TaskThread<String>().createTask(taskConfigurator);
         } else {
-            return new TaskOffline(context).createTask(taskConfigurator);
+            return new TaskOfline(context).createTask(taskConfigurator);
         }
     }
 

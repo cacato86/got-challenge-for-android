@@ -1,6 +1,5 @@
 package es.npatarino.android.gotchallenge.Engine;
 
-import android.app.Activity;
 import android.content.Context;
 
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
@@ -10,12 +9,12 @@ import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
 /**
  * Created by Usuario on 13/03/2016.
  */
-public class TaskOffline implements TaskInterface {
-    private final Activity activity;
+public class TaskOfline implements TaskInterface {
+    private final Context context;
     private TaskConfiguration taskConfigurator;
 
-    public TaskOffline(Activity activity) {
-        this.activity = activity;
+    public TaskOfline(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -26,7 +25,7 @@ public class TaskOffline implements TaskInterface {
 
     @Override
     public void executeTask(TaskResultCalback callbackResult) {
-        callbackResult.onResult(new SyncDataManager<>(activity, taskConfigurator).getData());
+        callbackResult.onResult(new SyncDataManager<>(context, taskConfigurator).getData());
     }
 
     @Override

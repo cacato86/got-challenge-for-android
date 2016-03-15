@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTCharacterAdapter;
+import es.npatarino.android.gotchallenge.Engine.ApiUrls;
 import es.npatarino.android.gotchallenge.Engine.Parser;
 import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
 import es.npatarino.android.gotchallenge.Engine.TaskLauncher;
@@ -35,8 +36,6 @@ import es.npatarino.android.gotchallenge.Utils.Utils;
  * Created by Usuario on 12/03/2016.
  */
 public class GoTCharactersListFragment extends Fragment implements SearchView.OnQueryTextListener {
-
-    private static final String URL_SERVER = "http://ec2-52-18-202-124.eu-west-1.compute.amazonaws.com:3000/characters";
 
     private ArrayList<GoTCharacter> charactersArray;
     private GoTCharacterAdapter characterAdapter;
@@ -66,7 +65,7 @@ public class GoTCharactersListFragment extends Fragment implements SearchView.On
         recycleview.setAdapter(characterAdapter);
 
         TaskConfiguration config = new TaskConfiguration();
-        config.setUrl(URL_SERVER);
+        config.setUrl(ApiUrls.CHARACTERS);
 
         TaskInterface task = new TaskManager(activity, config, Utils.isNetworkAvailable(activity)).getTask();
         SyncDataManager<Object> syncData = new SyncDataManager<>(activity, config);

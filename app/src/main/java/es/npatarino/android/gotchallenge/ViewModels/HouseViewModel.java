@@ -63,6 +63,7 @@ public class HouseViewModel extends BaseObservable {
 
     public String getName() {
         if (house.getId().equals("")) {
+            house.setName(UNKNOWN_HOUSE);
             return UNKNOWN_HOUSE;
         } else {
             return house.getName();

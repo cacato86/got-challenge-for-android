@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTHouseAdapter;
+import es.npatarino.android.gotchallenge.Engine.ApiUrls;
 import es.npatarino.android.gotchallenge.Engine.Parser;
 import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
 import es.npatarino.android.gotchallenge.Engine.TaskLauncher;
@@ -28,7 +29,6 @@ import es.npatarino.android.gotchallenge.Utils.Utils;
  */
 public class GoTHousesListFragment extends Fragment {
 
-    private static final String URL_SERVER = "http://ec2-52-18-202-124.eu-west-1.compute.amazonaws.com:3000/characters";
     private ContentLoadingProgressBar progresBar;
     private RecyclerView recycleview;
     private TextView emptyview;
@@ -52,7 +52,7 @@ public class GoTHousesListFragment extends Fragment {
         recycleview.setAdapter(houseAdapter);
 
         TaskConfiguration config = new TaskConfiguration();
-        config.setUrl(URL_SERVER);
+        config.setUrl(ApiUrls.HOUSES);
 
         TaskInterface task = new TaskManager(activity, config, Utils.isNetworkAvailable(activity)).getTask();
         SyncDataManager<Object> syncData = new SyncDataManager<>(activity, config);
