@@ -26,12 +26,22 @@ public class Parser {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(ArrayList.class, new CharactersAndHousesDeserializer());
         Gson gson = gsonBuilder.create();
-        return gson.fromJson(jsonString.toString(), ArrayList.class);
+        ArrayList<GoTHouse> houseGson = gson.fromJson(jsonString.toString(), ArrayList.class);
+        if (houseGson != null) {
+            return houseGson;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public ArrayList<GoTCharacter> getAllCharacters() {
         Type listType = new TypeToken<ArrayList<GoTCharacter>>() {
         }.getType();
-        return new Gson().fromJson(jsonString, listType);
+        ArrayList<GoTCharacter> characterGson = new Gson().fromJson(jsonString, listType);
+        if (characterGson != null) {
+            return characterGson;
+        } else {
+            return new ArrayList<>();
+        }
     }
 }

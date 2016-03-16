@@ -26,6 +26,7 @@ public class SyncDataManager<T> {
     }
 
     private SyncDataInterface createSyncTask(Context context) {
-        return new SyncSharedPreferences(context);
+        return new SyncSQLite(context);
+        //return new SyncSharedPreferences(context);
     }
 }

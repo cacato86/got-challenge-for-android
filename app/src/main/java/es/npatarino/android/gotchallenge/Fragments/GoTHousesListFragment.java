@@ -60,12 +60,12 @@ public class GoTHousesListFragment extends Fragment {
         new TaskLauncher(task, syncData).launchTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                final Parser houseStruct = new Parser(value.toString());
+                final Parser houseParsed = new Parser(value.toString());
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        houseAdapter.setHousesArray(houseStruct.getAllHouses());
-                        if (houseStruct.getAllHouses().size() < 1) {
+                        houseAdapter.setHousesArray(houseParsed.getAllHouses());
+                        if (houseParsed.getAllHouses().size() < 1) {
                             emptyview.setVisibility(View.VISIBLE);
                         }
                         progresBar.hide();
