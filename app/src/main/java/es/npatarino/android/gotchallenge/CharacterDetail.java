@@ -22,7 +22,6 @@ public class CharacterDetail extends AppCompatActivityCustom {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             GoTCharacter character = ((GoTCharacter) bundle.get("character"));
-            Log.e("CHAR", character.getName() + " /");
             createToolbar(character.getName());
             fillDetail(character);
         } else {

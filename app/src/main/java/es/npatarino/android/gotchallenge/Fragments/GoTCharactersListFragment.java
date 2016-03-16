@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,9 +44,9 @@ public class GoTCharactersListFragment extends Fragment implements SearchView.On
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_list_character, container, false);
         progresBar = (ContentLoadingProgressBar) rootView.findViewById(R.id.pb);
-        recycleview = (RecyclerView) rootView.findViewById(R.id.rv);
+        recycleview = (RecyclerView) rootView.findViewById(R.id.rv_character);
         emptyview = (TextView) rootView.findViewById(R.id.empty_view);
 
         setHasOptionsMenu(true);

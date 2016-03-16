@@ -29,12 +29,12 @@ public class SearchViewTest {
     public ActivityTestRule<HomeActivity> mActivityRule = new ActivityTestRule(HomeActivity.class);
 
     @Test
-    public void isSearchMenuItemVisibleInCharacterFragment() {
+    public void checkVisibilityAboutSearchIconInCharacterFragment() {
         onView(withId(R.id.ic_search)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void isSearchMenuItemVisibleInHouseFragment() {
+    public void checkVisibilityAboutSearchIconInHouseFragment() {
         onView(withText("Houses")).perform(click());
         onView(withId(R.id.ic_search)).check(doesNotExist());
     }
