@@ -73,20 +73,26 @@ public class GoTCharactersListFragment extends Fragment implements SearchView.On
         new TaskLauncher(task, syncData).launchTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                Parser charactersStruct = new Parser(value.toString());
+                final Parser charactersStruct = new Parser(value.toString());
                 charactersArray = charactersStruct.getAllCharacters();
-                characterAdapter.setCharacterArray(charactersArray);
-                if (charactersStruct.getAllCharacters().size() < 1) {
-                    emptyview.setVisibility(View.VISIBLE);
-                }
-                progresBar.hide();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        characterAdapter.setCharacterArray(charactersArray);
+                        if (charactersStruct.getAllCharacters().size() < 1) {
+                            emptyview.setVisibility(View.VISIBLE);
+                        }
+                        progresBar.hide();
+                    }
+                });
             }
 
             @Override
             public void onError(Object value) {
                 progresBar.hide();
                 emptyview.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(), value.toString(), Toast.LENGTH_LONG).show();
+                emptyview.setText(value.toString());
+                //Toast.makeText(getContext(), value.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }

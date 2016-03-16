@@ -45,7 +45,7 @@ public class GoTHousesListFragment extends Fragment {
         return rootView;
     }
 
-    private void getData(FragmentActivity activity) {
+    private void getData(final FragmentActivity activity) {
         final GoTHouseAdapter houseAdapter = new GoTHouseAdapter(activity);
         recycleview.setLayoutManager(new LinearLayoutManager(activity));
         recycleview.setHasFixedSize(true);
@@ -60,19 +60,26 @@ public class GoTHousesListFragment extends Fragment {
         new TaskLauncher(task, syncData).launchTask(new TaskResultCalback() {
             @Override
             public void onResult(Object value) {
-                Parser houseStruct = new Parser(value.toString());
-                houseAdapter.setHousesArray(houseStruct.getAllHouses());
-                if (houseStruct.getAllHouses().size() < 1) {
-                    emptyview.setVisibility(View.VISIBLE);
-                }
-                progresBar.hide();
+                final Parser houseStruct = new Parser(value.toString());
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        houseAdapter.setHousesArray(houseStruct.getAllHouses());
+                        if (houseStruct.getAllHouses().size() < 1) {
+                            emptyview.setVisibility(View.VISIBLE);
+                        }
+                        progresBar.hide();
+                    }
+                });
+
             }
 
             @Override
             public void onError(Object value) {
-                emptyview.setVisibility(View.VISIBLE);
                 progresBar.hide();
-                Toast.makeText(getContext(), value.toString(), Toast.LENGTH_LONG).show();
+                emptyview.setVisibility(View.VISIBLE);
+                emptyview.setText(value.toString());
+                //Toast.makeText(getContext(), value.toString(), Toast.LENGTH_LONG).show();
             }
         });
 

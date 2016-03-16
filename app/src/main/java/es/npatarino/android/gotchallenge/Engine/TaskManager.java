@@ -21,9 +21,10 @@ public class TaskManager {
 
     public TaskInterface getTask() {
         if (isNetworkActive) {
-            return new TaskThread<String>().createTask(taskConfigurator);
+            return new TaskOkHttp().createTask(taskConfigurator);
+            //return new TaskThread<String>().createTask(taskConfigurator);
         } else {
-            return new TaskOfline(context).createTask(taskConfigurator);
+            return new TaskOffline(context).createTask(taskConfigurator);
         }
     }
 

@@ -50,6 +50,6 @@ public class CharacterDetail extends AppCompatActivityCustom {
 
         ImageManager imageManager = new ImageManager(CharacterDetail.this);
         imageManager.getDowloaderImageTask().setImageUrlIntoImageView(character.getImageUrl(), imageDetail);
-
+        //
     }
 }

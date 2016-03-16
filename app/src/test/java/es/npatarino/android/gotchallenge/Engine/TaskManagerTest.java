@@ -38,6 +38,6 @@ public class TaskManagerTest {
         TaskConfiguration configration = new TaskConfiguration();
 
         TaskInterface task = new TaskManager(context, configration, false).getTask();
-        assertThat(task, instanceOf(TaskOfline.class));
+        assertThat(task, instanceOf(TaskOffline.class));
     }
 }

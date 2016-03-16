@@ -9,11 +9,11 @@ import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
 /**
  * Created by Usuario on 13/03/2016.
  */
-public class TaskOfline implements TaskInterface {
+public class TaskOffline implements TaskInterface {
     private final Context context;
     private TaskConfiguration taskConfigurator;
 
-    public TaskOfline(Context context) {
+    public TaskOffline(Context context) {
         this.context = context;
     }
 
