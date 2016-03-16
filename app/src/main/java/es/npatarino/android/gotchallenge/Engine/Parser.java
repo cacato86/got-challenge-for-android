@@ -1,5 +1,7 @@
 package es.npatarino.android.gotchallenge.Engine;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +24,7 @@ public class Parser {
         this.jsonString = jsonString;
     }
 
+    @NonNull
     public ArrayList<GoTHouse> getAllHouses() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(ArrayList.class, new CharactersAndHousesDeserializer());
@@ -34,6 +37,7 @@ public class Parser {
         }
     }
 
+    @NonNull
     public ArrayList<GoTCharacter> getAllCharacters() {
         Type listType = new TypeToken<ArrayList<GoTCharacter>>() {
         }.getType();

@@ -21,15 +21,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @Config(constants = BuildConfig.class, sdk = 16, manifest = "src/main/AndroidManifest.xml")
 public class TaskManagerTest {
 
-    String URL = "URL EXAMPLE";
-
     @Test
     public void getTaskWhenNetworkIsOnline(){
         Context context= RuntimeEnvironment.application.getApplicationContext();
         TaskConfiguration configration = new TaskConfiguration();
 
         TaskInterface task = new TaskManager(context, configration, true).getTask();
-        assertThat(task, instanceOf(TaskThread.class));
+        assertThat(task, instanceOf(TaskOkHttp.class));
     }
 
     @Test

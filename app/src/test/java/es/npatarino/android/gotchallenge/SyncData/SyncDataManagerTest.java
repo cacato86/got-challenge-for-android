@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -17,6 +18,7 @@ import es.npatarino.android.gotchallenge.R;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Usuario on 15/03/2016.
@@ -28,25 +30,33 @@ public class SyncDataManagerTest {
     private String KEYFORQUERY = "QUERY";
     private String URL = "URL PRUEBA";
 
+
     @Test
-    public void saveDataOffline(){
+    public void saveNormalDataAndCheckFinalValue(){
         Context context = RuntimeEnvironment.application;
         TaskConfiguration configuration = new TaskConfiguration();
         configuration.setUrl(KEYFORQUERY);
         SyncDataManager syncData = new SyncDataManager<>(context, configuration);
         syncData.setData(URL);
 
-        SharedPreferences sharedPref = context.getSharedPreferences(
-                context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
-        assertThat(sharedPref.getString(KEYFORQUERY, ""), is(URL));
+        assertThat((String)syncData.getData(), is(URL));
     }
 
     @Test
-    public void getDataOffline(){
+    public void saveEmptyDataAndCheckFinalValue(){
         Context context = RuntimeEnvironment.application;
         TaskConfiguration configuration = new TaskConfiguration();
-        configuration.setUrl(KEYFORQUERY);
+        configuration.setUrl("");
+        SyncDataManager syncData = new SyncDataManager<>(context, configuration);
+        syncData.setData("");
+
+        assertThat((String)syncData.getData(), is(""));
+    }
+
+    @Test(expected = Exception.class)
+    public void saveNullDataOfflineAndCheckFinalValue(){
+        Context context = RuntimeEnvironment.application;
+        TaskConfiguration configuration = null;
         SyncDataManager syncData = new SyncDataManager<>(context, configuration);
         syncData.setData(URL);
 
