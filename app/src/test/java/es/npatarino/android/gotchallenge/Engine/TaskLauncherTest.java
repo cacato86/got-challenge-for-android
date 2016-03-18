@@ -24,7 +24,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
 
 /**
- * Created by carloscarrasco on 15/3/16.
+ * Created by Carlos Carrasco on 15/3/16.
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 16, manifest = "src/main/AndroidManifest.xml")

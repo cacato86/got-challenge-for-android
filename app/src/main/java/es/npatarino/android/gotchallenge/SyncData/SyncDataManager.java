@@ -6,7 +6,7 @@ import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
 import es.npatarino.android.gotchallenge.Interfaces.SyncDataInterface;
 
 /**
- * Created by Usuario on 13/03/2016.
+ * Created by Carlos Carrasco on 13/03/2016.
  */
 public class SyncDataManager<T> {
     private final SyncDataInterface syncTask;

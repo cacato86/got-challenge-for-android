@@ -32,7 +32,7 @@ import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
 import es.npatarino.android.gotchallenge.Utils.Utils;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class GoTCharactersListFragment extends Fragment implements SearchView.OnQueryTextListener {
 

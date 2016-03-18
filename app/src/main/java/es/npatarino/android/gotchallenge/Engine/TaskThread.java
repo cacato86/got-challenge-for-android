@@ -9,7 +9,7 @@ import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 import es.npatarino.android.gotchallenge.Interfaces.TaskResultCalback;
 
 /**
- * Created by Usuario on 13/03/2016.
+ * Created by Carlos Carrasco on 13/03/2016.
  */
 public class TaskThread<T> implements Runnable, TaskInterface {
 

@@ -4,13 +4,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
 import es.npatarino.android.gotchallenge.R;
 
 /**
- * Created by Usuario on 13/03/2016.
+ * Created by Carlos Carrasco on 13/03/2016.
  */
 public class AppCompatActivityCustom extends AppCompatActivity {
 
@@ -20,12 +21,23 @@ public class AppCompatActivityCustom extends AppCompatActivity {
         changeColorStatusBar();
     }
 
-    private void changeColorStatusBar(){
+    private void changeColorStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return (super.onOptionsItemSelected(menuItem));
+
     }
 }

@@ -14,7 +14,7 @@ import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
 
 /**
- * Created by Usuario on 11/03/2016.
+ * Created by Carlos Carrasco on 11/03/2016.
  */
 public class Parser {
 

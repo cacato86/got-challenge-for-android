@@ -3,7 +3,6 @@ package es.npatarino.android.gotchallenge.Adapters;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,7 +14,7 @@ import es.npatarino.android.gotchallenge.ViewModels.HouseViewModel;
 import es.npatarino.android.gotchallenge.databinding.HouseRowBinding;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseBindingHolder> {
 
@@ -33,7 +32,7 @@ public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseB
 
     @Override
     public HouseBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         HouseRowBinding houseBinding = DataBindingUtil.inflate(
+        HouseRowBinding houseBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(activity),
                 R.layout.house_row,
                 parent,
@@ -61,8 +60,7 @@ public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseB
 
         void bindRepository(GoTHouse house) {
             if (binding.getViewModel() == null) {
-                Log.e("ACTIVITY",activity+" /");
-                binding.setViewModel(new HouseViewModel(activity, house));
+                binding.setViewModel(new HouseViewModel(house));
             } else {
                 binding.getViewModel().setHouse(house);
             }

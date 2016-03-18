@@ -1,0 +1,17 @@
+1-) He utilizado un patrón MVVM con DataBinding para separar la lógica de negocio (ViewModel) de
+las vistas (Adaptador y vistas xmls)
+
+2-)He utilizado el patrón AbstractFactory para generar mis Managers los cuales los utilizo de Wrapper
+para poder añadir varias implementaciones de forma sencilla:
+    2.1)TaskManager - Gestiona toda las peticiones que se realizan a la API. Posteriormente se podría
+        sustituir de forma sencilla por Retrofit.
+    2.2)ImageManager - Gestiona la descarga de imagenes de la aplicación. Es un Wrapper para facilitar
+        el uso de varias librerias según la necesidad que tengamos.
+    2.3-) SyncDataManager - Se encarga de guardar la información cada vez que realizamos una petición.
+          En este ejemplo la información se guarda en el SharePreference pero se podría incorporar
+          facilmente una clase que guarde toda esta info en la base datos sqlite de Android. El formato
+          en el que guardamos la información es URL - DATA, con lo que cacheamos todas las llamadas en
+          base a la URL de la API.
+
+3-) El Coverage de la suit de test es casi del 100% en el core de la app (Engine y SyncData)
+

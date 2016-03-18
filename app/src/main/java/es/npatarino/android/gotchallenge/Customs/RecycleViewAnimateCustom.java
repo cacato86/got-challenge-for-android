@@ -9,7 +9,7 @@ import es.npatarino.android.gotchallenge.Adapters.GoTCharacterAdapter;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 
 /**
- * Created by Usuario on 13/03/2016.
+ * Created by Carlos Carrasco on 13/03/2016.
  */
 public abstract class RecycleViewAnimateCustom extends RecyclerView.Adapter<GoTCharacterAdapter.CharacterBindingHolder> {
     public static Activity activity;

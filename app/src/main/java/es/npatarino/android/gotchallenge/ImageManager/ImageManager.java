@@ -5,7 +5,7 @@ import android.content.Context;
 import es.npatarino.android.gotchallenge.Interfaces.ImageManagerInterface;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class ImageManager {
     private final Context context;

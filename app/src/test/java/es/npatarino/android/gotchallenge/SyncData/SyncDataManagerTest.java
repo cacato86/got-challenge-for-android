@@ -21,7 +21,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Usuario on 15/03/2016.
+ * Created by Carlos Carrasco on 15/03/2016.
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 16, manifest = "src/main/AndroidManifest.xml")

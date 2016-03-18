@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by carloscarrasco on 16/3/16.
+ * Created by Carlos Carrasco on 16/3/16.
  */
 public class SQLiteHelper<T> extends SQLiteOpenHelper {
 
@@ -25,9 +25,9 @@ public class SQLiteHelper<T> extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + DATA_TABLE_NAME + "(" +
-                        DATA_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                        DATA_COLUMN_URL + " TEXT, " +
-                        DATA_COLUMN_INFORMATION + " TEXT) "
+                DATA_COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                DATA_COLUMN_URL + " TEXT, " +
+                DATA_COLUMN_INFORMATION + " TEXT) "
         );
     }
 
