@@ -17,3 +17,5 @@ para poder añadir varias implementaciones de forma sencilla:
 de characters o en su detalle y NO en la lista de Houses. Y que cuando apretamos a un elemento de la lista va a su detalle
 correctamente
 
+ATENCION - Si se utiliza un MAC para poder correr los test unitarios, deberemos añadir en
+Edit Configuration - JUnit - Working directory - $MODULE_DIR$
