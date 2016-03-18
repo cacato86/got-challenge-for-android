@@ -8,10 +8,12 @@ para poder añadir varias implementaciones de forma sencilla:
     2.2)ImageManager - Gestiona la descarga de imagenes de la aplicación. Es un Wrapper para facilitar
         el uso de varias librerias según la necesidad que tengamos.
     2.3-) SyncDataManager - Se encarga de guardar la información cada vez que realizamos una petición.
-          En este ejemplo la información se guarda en el SharePreference pero se podría incorporar
-          facilmente una clase que guarde toda esta info en la base datos sqlite de Android. El formato
+          En este ejemplo la información se puede guardar tanto en SQLite como en el SharePreference. El formato
           en el que guardamos la información es URL - DATA, con lo que cacheamos todas las llamadas en
           base a la URL de la API.
 
 3-) El Coverage de la suit de test es casi del 100% en el core de la app (Engine y SyncData)
+4-) Se ha Testeado las partes más importantes de la UI, como por ejemplo, que se muestre el Search icon solo en la lista
+de characters o en su detalle y NO en la lista de Houses. Y que cuando apretamos a un elemento de la lista va a su detalle
+correctamente
 
