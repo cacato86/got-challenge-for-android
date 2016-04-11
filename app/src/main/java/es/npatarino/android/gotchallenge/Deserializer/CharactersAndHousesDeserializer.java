@@ -15,7 +15,7 @@ import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class CharactersAndHousesDeserializer implements JsonDeserializer<ArrayList<GoTHouse>> {
 

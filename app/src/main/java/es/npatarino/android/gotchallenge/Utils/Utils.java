@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
 
 /**
- * Created by Usuario on 13/03/2016.
+ * Created by Carlos Carrasco on 13/03/2016.
  */
 public class Utils {
     public static ArrayList<GoTCharacter> filterList(ArrayList<GoTCharacter> models, String query) {

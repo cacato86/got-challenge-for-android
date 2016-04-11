@@ -21,7 +21,7 @@ import es.npatarino.android.gotchallenge.Models.GoTHouse;
 import es.npatarino.android.gotchallenge.Utils.Utils;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class HouseDetail extends AppCompatActivityCustom implements SearchView.OnQueryTextListener {
 

@@ -12,7 +12,7 @@ import java.net.URL;
 import es.npatarino.android.gotchallenge.Interfaces.ImageManagerInterface;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class ImageDownloaderThread implements ImageManagerInterface {
 
@@ -30,7 +30,7 @@ public class ImageDownloaderThread implements ImageManagerInterface {
                 try {
                     URL url = new URL(imageUrl);
                     final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    ((Activity)context).runOnUiThread(new Runnable() {
+                    ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             imageView.setImageBitmap(bmp);

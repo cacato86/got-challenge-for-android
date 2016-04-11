@@ -5,7 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 
 /**
- * Created by carloscarrasco on 15/3/16.
+ * Created by Carlos Carrasco on 15/3/16.
  */
 public class TaskConfigurationTest{
 

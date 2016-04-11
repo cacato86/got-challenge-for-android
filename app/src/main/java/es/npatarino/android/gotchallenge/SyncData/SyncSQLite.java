@@ -5,7 +5,7 @@ import android.content.Context;
 import es.npatarino.android.gotchallenge.Interfaces.SyncDataInterface;
 
 /**
- * Created by carloscarrasco on 16/3/16.
+ * Created by Carlos Carrasco on 16/3/16.
  */
 public class SyncSQLite implements SyncDataInterface {
 

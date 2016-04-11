@@ -8,7 +8,7 @@ import es.npatarino.android.gotchallenge.Fragments.GoTCharactersListFragment;
 import es.npatarino.android.gotchallenge.Fragments.GoTHousesListFragment;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

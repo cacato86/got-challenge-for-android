@@ -13,7 +13,7 @@ import es.npatarino.android.gotchallenge.ViewModels.CharacterViewModel;
 import es.npatarino.android.gotchallenge.databinding.CharacterRowBinding;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class GoTCharacterAdapter extends RecycleViewAnimateCustom {
 

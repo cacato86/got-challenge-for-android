@@ -12,7 +12,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by Usuario on 13/03/2016.
+ * Created by Carlos Carrasco on 13/03/2016.
  */
 public class TaskOkHttp implements TaskInterface {
 

@@ -9,7 +9,7 @@ import es.npatarino.android.gotchallenge.Interfaces.ImageManagerInterface;
 import es.npatarino.android.gotchallenge.R;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class ImageDownloaderPicasso implements ImageManagerInterface {
 
@@ -21,9 +21,9 @@ public class ImageDownloaderPicasso implements ImageManagerInterface {
 
     @Override
     public void setImageUrlIntoImageView(String imageUrl, ImageView imageView) {
-        if (!imageUrl.equals("")){
+        if (!imageUrl.equals("")) {
             Picasso.with(context).load(imageUrl).into(imageView);
-        }else{
+        } else {
             Picasso.with(context).load(R.drawable.got_placeholder).into(imageView);
         }
     }

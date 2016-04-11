@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import es.npatarino.android.gotchallenge.Adapters.GoTHouseAdapter;
 import es.npatarino.android.gotchallenge.Engine.ApiUrls;
@@ -25,7 +24,7 @@ import es.npatarino.android.gotchallenge.SyncData.SyncDataManager;
 import es.npatarino.android.gotchallenge.Utils.Utils;
 
 /**
- * Created by Usuario on 12/03/2016.
+ * Created by Carlos Carrasco on 12/03/2016.
  */
 public class GoTHousesListFragment extends Fragment {
 
