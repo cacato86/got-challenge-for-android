@@ -36,6 +36,7 @@ public class CharacterViewModel extends BaseObservable {
     public void onItemClick(View view) throws IllegalFormatException{
         Context context = view.getContext();
         Intent intent = new Intent(context, CharacterDetail.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("character", character);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ImageView imageShared = (ImageView) view.findViewById(R.id.ivBackground);

@@ -28,6 +28,7 @@ public class HouseViewModel extends BaseObservable {
 
     public void onItemClick(View view) {
         Intent intent = new Intent(view.getContext(), HouseDetail.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("house", house);
         view.getContext().startActivity(intent);
     }

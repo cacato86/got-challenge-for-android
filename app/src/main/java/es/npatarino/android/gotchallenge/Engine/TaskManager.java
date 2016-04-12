@@ -2,6 +2,8 @@ package es.npatarino.android.gotchallenge.Engine;
 
 import android.content.Context;
 
+import es.npatarino.android.gotchallenge.Engine.ConcreteTasks.TaskOffline;
+import es.npatarino.android.gotchallenge.Engine.ConcreteTasks.TaskStaticJson;
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 
 /**

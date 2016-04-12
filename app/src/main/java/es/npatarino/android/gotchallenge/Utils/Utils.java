@@ -29,8 +29,8 @@ public class Utils {
         return filteredModelList;
     }
 
-    public static boolean isNetworkAvailable(Activity activity) {
-        ConnectivityManager manager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 
         boolean isAvailable = false;

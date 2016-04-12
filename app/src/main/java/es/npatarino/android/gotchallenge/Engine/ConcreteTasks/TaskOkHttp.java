@@ -1,8 +1,9 @@
-package es.npatarino.android.gotchallenge.Engine;
+package es.npatarino.android.gotchallenge.Engine.ConcreteTasks;
 
 
 import java.io.IOException;
 
+import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 import es.npatarino.android.gotchallenge.Interfaces.TaskResultCalback;
 import okhttp3.Call;

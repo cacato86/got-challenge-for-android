@@ -1,10 +1,11 @@
-package es.npatarino.android.gotchallenge.Engine;
+package es.npatarino.android.gotchallenge.Engine.ConcreteTasks;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.npatarino.android.gotchallenge.Engine.TaskConfiguration;
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 import es.npatarino.android.gotchallenge.Interfaces.TaskResultCalback;
 

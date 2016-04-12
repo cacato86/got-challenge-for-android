@@ -9,6 +9,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import es.npatarino.android.gotchallenge.BuildConfig;
+import es.npatarino.android.gotchallenge.Engine.ConcreteTasks.TaskOffline;
+import es.npatarino.android.gotchallenge.Engine.ConcreteTasks.TaskOkHttp;
 import es.npatarino.android.gotchallenge.Interfaces.TaskInterface;
 
 import static org.hamcrest.CoreMatchers.instanceOf;

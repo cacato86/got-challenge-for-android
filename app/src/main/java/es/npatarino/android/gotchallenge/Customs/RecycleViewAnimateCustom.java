@@ -1,6 +1,7 @@
 package es.npatarino.android.gotchallenge.Customs;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -12,11 +13,11 @@ import es.npatarino.android.gotchallenge.Models.GoTCharacter;
  * Created by Carlos Carrasco on 13/03/2016.
  */
 public abstract class RecycleViewAnimateCustom extends RecyclerView.Adapter<GoTCharacterAdapter.CharacterBindingHolder> {
-    public static Activity activity;
+    public static Context context;
     public ArrayList<GoTCharacter> charactersArray = new ArrayList<>();
 
-    public RecycleViewAnimateCustom(Activity activity) {
-        this.activity = activity;
+    public RecycleViewAnimateCustom(Context context) {
+        this.context = context;
     }
 
     public void setCharacterArray(ArrayList<GoTCharacter> characters) {

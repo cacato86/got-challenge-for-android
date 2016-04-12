@@ -1,12 +1,15 @@
 package es.npatarino.android.gotchallenge.Adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import es.npatarino.android.gotchallenge.Models.GoTHouse;
 import es.npatarino.android.gotchallenge.R;
@@ -18,11 +21,12 @@ import es.npatarino.android.gotchallenge.databinding.HouseRowBinding;
  */
 public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseBindingHolder> {
 
-    private static Activity activity;
+    private static Context context;
     private ArrayList<GoTHouse> housesArray = new ArrayList<>();
 
-    public GoTHouseAdapter(Activity activity) {
-        this.activity = activity;
+    @Inject
+    public GoTHouseAdapter(Context context) {
+        this.context = context;
     }
 
     public void setHousesArray(ArrayList<GoTHouse> housesArray) {
@@ -33,7 +37,7 @@ public class GoTHouseAdapter extends RecyclerView.Adapter<GoTHouseAdapter.HouseB
     @Override
     public HouseBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         HouseRowBinding houseBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(activity),
+                LayoutInflater.from(context),
                 R.layout.house_row,
                 parent,
                 false);

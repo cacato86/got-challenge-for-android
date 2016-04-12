@@ -1,10 +1,13 @@
 package es.npatarino.android.gotchallenge.Adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import javax.inject.Inject;
 
 import es.npatarino.android.gotchallenge.Customs.RecycleViewAnimateCustom;
 import es.npatarino.android.gotchallenge.Models.GoTCharacter;
@@ -17,14 +20,14 @@ import es.npatarino.android.gotchallenge.databinding.CharacterRowBinding;
  */
 public class GoTCharacterAdapter extends RecycleViewAnimateCustom {
 
-    public GoTCharacterAdapter(Activity activity) {
-        super(activity);
+    @Inject public GoTCharacterAdapter(Context context) {
+        super(context);
     }
 
     @Override
     public CharacterBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CharacterRowBinding characterBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(activity),
+                LayoutInflater.from(context),
                 R.layout.character_row,
                 parent,
                 false);
